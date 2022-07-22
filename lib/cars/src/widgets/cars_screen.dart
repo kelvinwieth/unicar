@@ -15,18 +15,40 @@ class CarsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<CarsCubit>(context);
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: cars.length,
-        itemBuilder: (context, index) {
-          var car = cars[index];
-          return CarCard(car: car);
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 60, 84, 189),
-        child: const Icon(Icons.add, size: 40),
-        onPressed: () => showEditCarDialog(context, cubit),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        body: ListView.builder(
+          itemCount: cars.length,
+          itemBuilder: (context, index) {
+            var car = cars[index];
+            return CarCard(car: car);
+          },
+        ),
+        // appBar: AppBar(
+        //   bottom: const TabBar(
+        //     indicatorWeight: 5,
+        //     tabs: [
+        //       Tab(
+        //         icon: Icon(Icons.car_rental),
+        //         text: 'Carros',
+        //       ),
+        //       Tab(
+        //         icon: Icon(Icons.car_rental),
+        //         text: 'Clientes',
+        //       ),
+        //       Tab(
+        //         icon: Icon(Icons.car_rental),
+        //         text: 'Vendas',
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 60, 84, 189),
+          child: const Icon(Icons.add, size: 40),
+          onPressed: () => showEditCarDialog(context, cubit),
+        ),
       ),
     );
   }
