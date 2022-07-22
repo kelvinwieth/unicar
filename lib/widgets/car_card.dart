@@ -21,22 +21,29 @@ class CarCard extends StatelessWidget {
             gradient: LinearGradient(
               colors: [
                 Colors.black,
-                Colors.blueAccent,
+                Colors.blueGrey,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
           child: ListTile(
-            leading: Image.network(
-              car.photo,
-              height: 100,
-              width: 90,
-              fit: BoxFit.fill,
-              loadingBuilder: (context, child, progress) {
-                if (progress == null) return child;
-                return const CircularProgressIndicator();
-              },
+            leading: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: Colors.white,
+              ),
+              child: Image.network(
+                car.photo,
+                height: 100,
+                width: 90,
+                fit: BoxFit.fill,
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) return child;
+                  return const CircularProgressIndicator();
+                },
+              ),
             ),
             title: Text(
               car.title,
