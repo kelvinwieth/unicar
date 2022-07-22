@@ -1,40 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:unicar/models/car.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicar/cubits/cars_cubit.dart';
+import 'package:unicar/cubits/cars_state.dart';
 
-class CarsView extends StatefulWidget {
+class CarsView extends StatelessWidget {
   const CarsView({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<CarsView> createState() => _CarsViewState();
-}
-
-class _CarsViewState extends State<CarsView> {
-  List<Car> _cars = [];
-
-  void loadVehicles() async {
-    await Future.delayed(const Duration(seconds: 3));
-    _cars = [
-      Car(
-        title: 'Argo 1.0 Automático',
-        brand: 'Chevrolet',
-        price: 45000,
-        photo: 'photo',
-      ),
-    ];
-
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    loadVehicles();
-
-    return Center(
-      child: Text('${_cars.length} carros foram carregados'),
+    return BlocBuilder<CarsCubit, CarsState>(
+      builder: (context, state) {
+        if (state is CarsLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return const Center(
+            child: Text('Opa'),
+          );
+        }
+      },
     );
   }
 }
