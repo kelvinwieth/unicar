@@ -26,9 +26,16 @@ class CarsCubit extends Cubit<CarsState> {
     emit(CreatingCarState());
   }
 
-  void finishCreation(Car car) {
-    // TODO: add car on repository
-    _loadCars();
+  void addCar(Car car) async {
+    try {
+      var success = await _repository.add(car);
+      if (success) {
+        _loadCars();
+        return;
+      }
+    } finally {
+      emit(CarsGenericErrorState("Erro ao adicionar carro. Tente novamente."));
+    }
   }
 
   void cancelCreation() {
