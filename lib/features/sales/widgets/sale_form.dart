@@ -38,28 +38,14 @@ class _SaleFormState extends State<SaleForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  'Adicionar venda',
+                Text(
+                  '${isEditing ? 'Atualizar' : 'Adicionar'} venda',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 22),
+                  style: const TextStyle(fontSize: 22),
                 ),
                 const SizedBox(height: 40),
                 TextFormField(
-                  initialValue: sale.customer,
-                  validator: validate,
-                  maxLength: 30,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.abc),
-                    labelText: 'Nome do cliente',
-                    hintText: 'João da Silva',
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    border: OutlineInputBorder(),
-                  ),
-                  onSaved: (value) => sale.customer = value!,
-                ),
-                const SizedBox(height: 40),
-                TextFormField(
-                  initialValue: sale.customer,
+                  initialValue: sale.car,
                   validator: validate,
                   maxLength: 30,
                   decoration: const InputDecoration(
@@ -70,6 +56,20 @@ class _SaleFormState extends State<SaleForm> {
                     border: OutlineInputBorder(),
                   ),
                   onSaved: (value) => sale.car = value!,
+                ),
+                const SizedBox(height: 40),
+                TextFormField(
+                  initialValue: sale.customer,
+                  validator: validate,
+                  maxLength: 30,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.abc),
+                    labelText: 'Cliente',
+                    hintText: 'João da Silva',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    border: OutlineInputBorder(),
+                  ),
+                  onSaved: (value) => sale.customer = value!,
                 ),
                 const SizedBox(height: 40),
                 PriceFormField(

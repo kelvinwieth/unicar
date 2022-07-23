@@ -37,6 +37,10 @@ class SalesView extends StatelessWidget {
           return const SaleForm();
         }
 
+        if (state is EditingSaleState) {
+          return SaleForm(sale: state.sale);
+        }
+
         return const Center(
           child: CircularProgressIndicator(),
         );
