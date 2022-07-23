@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:unicar/commom/themes/uni_colors.dart';
 import 'package:unicar/commom/widgets/subtitled_icon.dart';
 import 'package:unicar/features/sales/cubit/sales_cubit.dart';
 import 'package:unicar/features/sales/models/sale.dart';
@@ -72,7 +73,7 @@ class SaleCard extends StatelessWidget {
                   GestureDetector(
                     child: const Icon(
                       Icons.delete,
-                      color: Colors.white,
+                      color: UniColors.recycleBin,
                     ),
                     onTap: () {
                       final cubit = BlocProvider.of<SalesCubit>(context);

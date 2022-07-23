@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
+import 'package:unicar/commom/themes/uni_colors.dart';
 import 'package:unicar/features/customers/cubit/customers_cubit.dart';
 import 'package:unicar/features/customers/models/customer.dart';
 
@@ -48,7 +49,7 @@ class CustomerCard extends StatelessWidget {
               trailing: GestureDetector(
                 child: const Icon(
                   Icons.delete,
-                  color: Colors.white,
+                  color: UniColors.recycleBin,
                 ),
                 onTap: () {
                   final cubit = BlocProvider.of<CustomersCubit>(context);

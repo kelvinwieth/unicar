@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:unicar/commom/themes/uni_colors.dart';
 import 'package:unicar/features/cars/cubits/cars_cubit.dart';
 import 'package:unicar/features/cars/models/car.dart';
 
@@ -66,7 +67,7 @@ class CarCard extends StatelessWidget {
               trailing: GestureDetector(
                 child: const Icon(
                   Icons.delete,
-                  color: Colors.white,
+                  color: UniColors.recycleBin,
                 ),
                 onTap: () {
                   final cubit = BlocProvider.of<CarsCubit>(context);

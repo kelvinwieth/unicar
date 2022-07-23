@@ -4,7 +4,7 @@ import 'package:unicar/features/customers/cubit/customers_cubit.dart';
 import 'package:unicar/features/customers/cubit/customers_state.dart';
 import 'package:unicar/features/customers/widgets/customer_card.dart';
 import 'package:unicar/features/customers/widgets/customer_form.dart';
-import 'package:unicar/commom/utils/uni_theme.dart';
+import 'package:unicar/commom/themes/uni_theme.dart';
 
 class CustomersView extends StatelessWidget {
   const CustomersView({
