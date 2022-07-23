@@ -6,7 +6,7 @@ import 'package:unicar/features/cars/repositories/car_repository.dart';
 import 'package:unicar/features/customers/cubit/customers_cubit.dart';
 import 'package:unicar/features/sales/cubit/sales_cubit.dart';
 import 'package:unicar/features/sales/repositories/sale_repository.dart';
-import 'package:unicar/pages/home_page.dart';
+import 'package:unicar/commom/pages/home_page.dart';
 import 'package:unicar/features/customers/repositories/customer_repository.dart';
 
 void main() {

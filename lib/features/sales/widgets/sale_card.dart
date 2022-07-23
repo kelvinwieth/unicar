@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:unicar/commom/widgets/subtitled_icon.dart';
 import 'package:unicar/features/sales/cubit/sales_cubit.dart';
 import 'package:unicar/features/sales/models/sale.dart';
 
@@ -13,6 +15,8 @@ class SaleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat.simpleCurrency();
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
       child: GestureDetector(
@@ -34,10 +38,32 @@ class SaleCard extends StatelessWidget {
               ),
             ),
             child: ListTile(
-              title: Text(
-                sale.car,
-                style: const TextStyle(
-                  color: Colors.white,
+              title: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  children: [
+                    SubtitledIcon(
+                      subtitle: sale.car,
+                      icon: Icons.directions_car,
+                    ),
+                    const Icon(
+                      Icons.arrow_right,
+                      color: Colors.white,
+                    ),
+                    SubtitledIcon(
+                      subtitle: currencyFormatter.format(sale.price),
+                      icon: Icons.sell,
+                      width: 100,
+                    ),
+                    const Icon(
+                      Icons.arrow_right,
+                      color: Colors.white,
+                    ),
+                    SubtitledIcon(
+                      subtitle: sale.customer,
+                      icon: Icons.person,
+                    ),
+                  ],
                 ),
               ),
               trailing: Row(

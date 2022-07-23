@@ -12,9 +12,10 @@ abstract class SaleRepository {
 
 class SaleInMemoryRepository implements SaleRepository {
   final List<Sale> _sales = [
-    Sale(car: 'Carro 1', customer: 'Cliente 1', price: 10000),
-    Sale(car: 'Carro 2', customer: 'Cliente 2', price: 20000),
+    Sale(car: 'Carro 1', customer: 'Cliente 1', price: 1000000),
+    Sale(car: 'Carro 2', customer: 'Cliente 2', price: 200000),
     Sale(car: 'Carro 3', customer: 'Cliente 3', price: 30000),
+    Sale(car: 'Carro 4', customer: 'Cliente 3', price: 10000000),
   ];
 
   @override
