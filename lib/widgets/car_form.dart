@@ -17,11 +17,12 @@ class _CarFormState extends State<CarForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 14),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 14),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -72,41 +73,38 @@ class _CarFormState extends State<CarForm> {
           ),
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              final cubit = BlocProvider.of<CarsCubit>(context);
-              cubit.cancelCreation();
-            },
-            child: Container(
-              height: 60,
-              width: 60,
-              decoration: UniTheme.roundCancelButtonDecoration,
-              child: const Icon(Icons.close),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: IconButton(
+                color: Colors.grey,
+                icon: const Icon(Icons.close, size: 30),
+                onPressed: () {
+                  final cubit = BlocProvider.of<CarsCubit>(context);
+                  cubit.cancelCreation();
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          FloatingActionButton(
-            onPressed: () {
-              final isValid = _formKey.currentState?.validate() ?? false;
+            Expanded(
+              child: IconButton(
+                color: Colors.green,
+                icon: const Icon(Icons.done, size: 30),
+                onPressed: () {
+                  final isValid = _formKey.currentState?.validate() ?? false;
 
-              if (!isValid) {
-                return;
-              }
+                  if (!isValid) {
+                    return;
+                  }
 
-              final cubit = BlocProvider.of<CarsCubit>(context);
-              cubit.cancelCreation();
-            },
-            child: Container(
-              height: 60,
-              width: 60,
-              decoration: UniTheme.roundConfirmButtonDecoration,
-              child: const Icon(Icons.done),
+                  final cubit = BlocProvider.of<CarsCubit>(context);
+                  cubit.cancelCreation();
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
