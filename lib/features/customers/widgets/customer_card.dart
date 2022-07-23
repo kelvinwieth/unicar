@@ -16,54 +16,45 @@ class CustomerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.black,
-                Colors.blueGrey,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: ListTile(
-            title: Text(
-              customer.name,
-              style: const TextStyle(
-                color: Colors.white,
+      child: GestureDetector(
+        onTap: () {
+          final cubit = BlocProvider.of<CustomersCubit>(context);
+          cubit.startEdition(customer);
+        },
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.black,
+                  Colors.blueGrey,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
             ),
-            leading: Initicon(
-              text: customer.name,
-              backgroundColor: Colors.blueGrey,
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GestureDetector(
-                  child: const Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                  ),
-                  onTap: () {
-                    final cubit = BlocProvider.of<CustomersCubit>(context);
-                    cubit.startEdition(customer);
-                  },
+            child: ListTile(
+              title: Text(
+                customer.name,
+                style: const TextStyle(
+                  color: Colors.white,
                 ),
-                GestureDetector(
-                  child: const Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                  ),
-                  onTap: () {
-                    final cubit = BlocProvider.of<CustomersCubit>(context);
-                    cubit.removeCustomer(customer);
-                  },
+              ),
+              leading: Initicon(
+                text: customer.name,
+                backgroundColor: Colors.blueGrey,
+              ),
+              trailing: GestureDetector(
+                child: const Icon(
+                  Icons.delete,
+                  color: Colors.white,
                 ),
-              ],
+                onTap: () {
+                  final cubit = BlocProvider.of<CustomersCubit>(context);
+                  cubit.removeCustomer(customer);
+                },
+              ),
             ),
           ),
         ),
