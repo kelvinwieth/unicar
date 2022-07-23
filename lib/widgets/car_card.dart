@@ -41,7 +41,7 @@ class CarCard extends StatelessWidget {
                 fit: BoxFit.fill,
                 loadingBuilder: (context, child, progress) {
                   if (progress == null) return child;
-                  return const CircularProgressIndicator();
+                  return const Icon(Icons.image);
                 },
               ),
             ),
