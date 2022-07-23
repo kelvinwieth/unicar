@@ -30,6 +30,7 @@ class SubtitledIcon extends StatelessWidget {
           const SizedBox(height: 5),
           Text(
             subtitle,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white70,
               fontSize: fontSize,

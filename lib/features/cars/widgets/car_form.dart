@@ -65,7 +65,7 @@ class _CarFormState extends State<CarForm> {
                 ),
                 const SizedBox(height: 20),
                 PriceFormField(
-                  initialValue: isEditing ? currencyFormatter.format(car.price) : null,
+                  initialValue: isEditing ? car.price : null,
                   validator: validate,
                   onSaved: (value) {
                     final price = value!.replaceAll('R\$', '').replaceAll('.', '').replaceAll(',', '.').trim();

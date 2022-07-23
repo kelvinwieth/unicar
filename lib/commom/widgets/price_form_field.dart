@@ -1,5 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PriceFormField extends StatelessWidget {
   const PriceFormField({
@@ -11,12 +12,14 @@ class PriceFormField extends StatelessWidget {
 
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
-  final String? initialValue;
+  final double? initialValue;
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat.simpleCurrency();
+
     return TextFormField(
-      initialValue: initialValue,
+      initialValue: initialValue == null ? null : currencyFormatter.format(initialValue),
       validator: validator,
       maxLength: 16,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),

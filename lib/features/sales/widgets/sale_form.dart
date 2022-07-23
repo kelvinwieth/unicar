@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicar/commom/widgets/price_form_field.dart';
 import 'package:unicar/features/sales/cubit/sales_cubit.dart';
 import 'package:unicar/features/sales/models/sale.dart';
 
@@ -69,6 +70,15 @@ class _SaleFormState extends State<SaleForm> {
                     border: OutlineInputBorder(),
                   ),
                   onSaved: (value) => sale.car = value!,
+                ),
+                const SizedBox(height: 40),
+                PriceFormField(
+                  initialValue: isEditing ? sale.price : null,
+                  validator: validate,
+                  onSaved: (value) {
+                    final price = value!.replaceAll('R\$', '').replaceAll('.', '').replaceAll(',', '.').trim();
+                    sale.price = double.tryParse(price) ?? 0;
+                  },
                 ),
               ],
             ),
