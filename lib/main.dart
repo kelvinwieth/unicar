@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:unicar/cars/src/cubits/cars_cubit.dart';
-import 'package:unicar/cars/src/repositories/local_car_repository.dart';
-import 'package:unicar/cars/src/utils/constants.dart';
-import 'package:unicar/cars/src/widgets/cars_page.dart';
+import 'package:intl/intl.dart';
+import 'package:unicar/features/cars/cubits/cars_cubit.dart';
+import 'package:unicar/features/cars/repositories/car_repository.dart';
+import 'package:unicar/features/customers/cubit/customers_cubit.dart';
+import 'package:unicar/pages/home_page.dart';
+import 'package:unicar/features/customers/repositories/customer_repository.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  final storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
-  );
-
-  HydratedBlocOverrides.runZoned(
-    () => runApp(const Unicar()),
-    storage: storage,
-  );
+void main() {
+  Intl.defaultLocale = 'pt_BR';
+  runApp(const Unicar());
 }
 
 class Unicar extends StatelessWidget {
@@ -25,31 +17,25 @@ class Unicar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final carsRepository = CarInMemoryRepository();
+    final customersRepository = CustomerInMemoryRepository();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: BlocProvider(
-          create: (_) => CarsCubit(repository: LocalCarRepository()),
-          child: const CarsPage(),
-        ),
-        appBar: AppBar(
-          title: const Text(kAppTitle),
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {},
-          ),
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [kAppMainColor, Colors.black],
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
-              ),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => MultiBlocProvider(
+              providers: [
+                BlocProvider<CarsCubit>(
+                  create: (_) => CarsCubit(carsRepository),
+                ),
+                BlocProvider<CustomersCubit>(
+                  create: (_) => CustomersCubit(customersRepository),
+                ),
+              ],
+              child: const HomePage(),
             ),
-          ),
-        ),
-      ),
+      },
     );
   }
 }
