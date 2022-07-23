@@ -2,6 +2,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicar/cubits/cars_cubit.dart';
+import 'package:unicar/models/car.dart';
 
 class CarForm extends StatefulWidget {
   const CarForm({Key? key}) : super(key: key);
@@ -15,6 +16,12 @@ class _CarFormState extends State<CarForm> {
 
   @override
   Widget build(BuildContext context) {
+    var car = Car(
+      title: '',
+      price: 0,
+      photo: '',
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -38,10 +45,11 @@ class _CarFormState extends State<CarForm> {
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.abc),
                     labelText: 'Título do anúncio',
-                    hintText: 'Uno Mille 1.0 2002 Manual',
+                    hintText: 'Uno Mille 1.0 2002',
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     border: OutlineInputBorder(),
                   ),
+                  onSaved: (value) => car.title = value!,
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
@@ -62,6 +70,10 @@ class _CarFormState extends State<CarForm> {
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     border: OutlineInputBorder(),
                   ),
+                  onSaved: (value) {
+                    final price = value!.replaceAll('R\$', '').replaceAll('.', '').replaceAll(',', '.').trim();
+                    car.price = double.tryParse(price) ?? 0;
+                  },
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
@@ -74,6 +86,7 @@ class _CarFormState extends State<CarForm> {
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     border: OutlineInputBorder(),
                   ),
+                  onSaved: (value) => car.photo = value!,
                 ),
               ],
             ),
@@ -105,8 +118,10 @@ class _CarFormState extends State<CarForm> {
                     return;
                   }
 
+                  _formKey.currentState!.save();
+
                   final cubit = BlocProvider.of<CarsCubit>(context);
-                  cubit.cancelCreation();
+                  cubit.addCar(car);
                 },
               ),
             ),

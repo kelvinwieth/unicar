@@ -52,7 +52,7 @@ class CarsView extends StatelessWidget {
         }
 
         return const Center(
-          child: Text('Opa'),
+          child: CircularProgressIndicator(),
         );
       },
     );

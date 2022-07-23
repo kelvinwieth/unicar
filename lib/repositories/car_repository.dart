@@ -9,17 +9,17 @@ abstract class CarRepository {
 class CarInMemoryRepository implements CarRepository {
   final List<Car> _cars = [
     Car(
-      title: 'Fiat Argo 1.0 Automático',
+      title: 'Fiat Argo 1.0 2022',
       price: 50000,
       photo: 'https://i.imgur.com/w4d9Vbkm.png',
     ),
     Car(
-      title: 'Fiat Toro 1.8 Automático',
+      title: 'Fiat Toro 1.8 2022',
       price: 150000,
       photo: 'https://i.imgur.com/2TYFeIam.png',
     ),
     Car(
-      title: 'Fiat Strada 1.3 Manual',
+      title: 'Fiat Strada 1.3 2021',
       price: 80000,
       photo: 'https://i.imgur.com/Ph0j8yim.png',
     ),
