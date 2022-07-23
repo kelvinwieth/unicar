@@ -6,6 +6,8 @@ abstract class CustomerRepository {
   Future<bool> add(Customer customer);
 
   Future<bool> update(Customer customer);
+
+  Future<bool> remove(Customer customer);
 }
 
 class CustomerInMemoryRepository implements CustomerRepository {
@@ -36,5 +38,11 @@ class CustomerInMemoryRepository implements CustomerRepository {
     } on StateError {
       return false;
     }
+  }
+
+  @override
+  Future<bool> remove(Customer customer) async {
+    _customers.remove(customer);
+    return true;
   }
 }

@@ -40,15 +40,30 @@ class CustomerCard extends StatelessWidget {
               text: customer.name,
               backgroundColor: Colors.blueGrey,
             ),
-            trailing: IconButton(
-              icon: const Icon(
-                Icons.more_vert,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                final cubit = BlocProvider.of<CustomersCubit>(context);
-                cubit.startEdition(customer);
-              },
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    final cubit = BlocProvider.of<CustomersCubit>(context);
+                    cubit.startEdition(customer);
+                  },
+                ),
+                GestureDetector(
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    final cubit = BlocProvider.of<CustomersCubit>(context);
+                    cubit.removeCustomer(customer);
+                  },
+                ),
+              ],
             ),
           ),
         ),

@@ -54,6 +54,18 @@ class CustomersCubit extends Cubit<CustomersState> {
     }
   }
 
+  void removeCustomer(Customer customer) async {
+    try {
+      var success = await _repository.remove(customer);
+      if (success) {
+        _loadCustomers();
+        return;
+      }
+    } finally {
+      emit(CustomersErrorState("Erro ao remover cliente. Tente novamente."));
+    }
+  }
+
   void cancelCreation() {
     emit(CustomersLoadedState(_lastCustomers));
   }
