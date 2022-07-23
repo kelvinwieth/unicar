@@ -25,10 +25,16 @@ class EditingCustomerState extends CustomersState {
   final Customer customer;
 
   EditingCustomerState(this.customer);
+
+  @override
+  List<Object?> get props => [customer];
 }
 
 class CustomersErrorState extends CustomersState {
   final String message;
 
   CustomersErrorState(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }

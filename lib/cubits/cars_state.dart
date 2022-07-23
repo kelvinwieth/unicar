@@ -21,8 +21,20 @@ class CarsLoadedState extends CarsState {
 
 class CreatingCarState extends CarsState {}
 
+class EditingCarState extends CarsState {
+  final Car car;
+
+  EditingCarState(this.car);
+
+  @override
+  List<Object?> get props => [car];
+}
+
 class CarsErrorState extends CarsState {
   final String message;
 
   CarsErrorState(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }

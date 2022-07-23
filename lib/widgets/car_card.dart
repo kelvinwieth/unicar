@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicar/cubits/cars_cubit.dart';
 import 'package:unicar/models/car.dart';
 import 'package:intl/intl.dart';
 
@@ -56,9 +58,30 @@ class CarCard extends StatelessWidget {
               formatCurrency.format(car.price),
               style: const TextStyle(color: Colors.white70),
             ),
-            trailing: const Icon(
-              Icons.more_vert,
-              color: Colors.white,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    final cubit = BlocProvider.of<CarsCubit>(context);
+                    cubit.startEdition(car);
+                  },
+                ),
+                GestureDetector(
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    final cubit = BlocProvider.of<CarsCubit>(context);
+                    cubit.removeCar(car);
+                  },
+                ),
+              ],
             ),
           ),
         ),

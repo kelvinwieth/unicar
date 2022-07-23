@@ -1,26 +1,36 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:unicar/cubits/cars_cubit.dart';
 import 'package:unicar/models/car.dart';
 
 class CarForm extends StatefulWidget {
-  const CarForm({Key? key}) : super(key: key);
+  final Car? car;
+
+  const CarForm({
+    Key? key,
+    this.car,
+  }) : super(key: key);
 
   @override
   State<CarForm> createState() => _CarFormState();
 }
 
 class _CarFormState extends State<CarForm> {
+  final currencyFormatter = NumberFormat.simpleCurrency();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    var car = Car(
-      title: '',
-      price: 0,
-      photo: '',
-    );
+    final isEditing = widget.car != null;
+    var car = isEditing
+        ? widget.car!
+        : Car(
+            title: '',
+            price: 0,
+            photo: '',
+          );
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -33,13 +43,14 @@ class _CarFormState extends State<CarForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  'Adicionar carro',
+                Text(
+                  '${isEditing ? 'Atualizar' : 'Adicionar'} carro',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 22),
+                  style: const TextStyle(fontSize: 22),
                 ),
                 const SizedBox(height: 40),
                 TextFormField(
+                  initialValue: car.title,
                   validator: validate,
                   maxLength: 30,
                   decoration: const InputDecoration(
@@ -53,6 +64,7 @@ class _CarFormState extends State<CarForm> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  initialValue: currencyFormatter.format(car.price),
                   validator: validate,
                   maxLength: 16,
                   keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -77,6 +89,7 @@ class _CarFormState extends State<CarForm> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  initialValue: car.photo,
                   validator: validate,
                   maxLength: 50,
                   decoration: const InputDecoration(
@@ -121,7 +134,12 @@ class _CarFormState extends State<CarForm> {
                   _formKey.currentState!.save();
 
                   final cubit = BlocProvider.of<CarsCubit>(context);
-                  cubit.addCar(car);
+
+                  if (isEditing) {
+                    cubit.updateCar(car);
+                  } else {
+                    cubit.addCar(car);
+                  }
                 },
               ),
             ),

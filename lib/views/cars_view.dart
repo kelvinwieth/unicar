@@ -51,6 +51,10 @@ class CarsView extends StatelessWidget {
           return const CarForm();
         }
 
+        if (state is EditingCarState) {
+          return CarForm(car: state.car);
+        }
+
         return const Center(
           child: CircularProgressIndicator(),
         );

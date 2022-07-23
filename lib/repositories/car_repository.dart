@@ -4,6 +4,10 @@ abstract class CarRepository {
   Future<List<Car>> getAll();
 
   Future<bool> add(Car car);
+
+  Future<bool> update(Car car);
+
+  Future<bool> remove(Car car);
 }
 
 class CarInMemoryRepository implements CarRepository {
@@ -36,5 +40,26 @@ class CarInMemoryRepository implements CarRepository {
     await Future.delayed(const Duration(seconds: 1));
     _cars.add(car);
     return true;
+  }
+
+  @override
+  Future<bool> remove(Car car) async {
+    _cars.remove(car);
+    return true;
+  }
+
+  @override
+  Future<bool> update(Car car) async {
+    try {
+      var sourceCar = _cars.firstWhere((c) => c.id == car.id);
+
+      sourceCar.title = car.title;
+      sourceCar.price = car.price;
+      sourceCar.photo = car.photo;
+
+      return true;
+    } on StateError {
+      return false;
+    }
   }
 }

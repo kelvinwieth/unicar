@@ -50,7 +50,7 @@ class CustomersCubit extends Cubit<CustomersState> {
         return;
       }
     } finally {
-      emit(CustomersErrorState("Erro ao adicionar cliente. Tente novamente."));
+      emit(CustomersErrorState("Erro ao atualizar cliente. Tente novamente."));
     }
   }
 
