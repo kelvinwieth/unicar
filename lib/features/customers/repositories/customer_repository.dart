@@ -1,4 +1,4 @@
-import 'package:unicar/models/customer.dart';
+import 'package:unicar/features/customers/models/customer.dart';
 
 abstract class CustomerRepository {
   Future<List<Customer>> getAll();

@@ -1,4 +1,4 @@
-import 'package:unicar/models/car.dart';
+import 'package:unicar/features/cars/models/car.dart';
 
 abstract class CarRepository {
   Future<List<Car>> getAll();

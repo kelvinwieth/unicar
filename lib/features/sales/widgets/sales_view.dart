@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unicar/models/sale.dart';
+import 'package:unicar/features/sales/models/sale.dart';
 
 class SalesView extends StatefulWidget {
   const SalesView({
@@ -16,8 +16,8 @@ class _SalesViewState extends State<SalesView> {
   void loadSales() async {
     await Future.delayed(const Duration(seconds: 1));
     _sales = [
-      Sale(car: 'First sale'),
-      Sale(car: 'Second sale'),
+      Sale(customer: 'Foo', car: 'BMW M5', price: 25000),
+      Sale(customer: 'Bar', car: 'BMW X9', price: 22000),
     ];
 
     if (mounted) {

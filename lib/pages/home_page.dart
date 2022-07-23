@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unicar/views/cars_view.dart';
-import 'package:unicar/views/customers_view.dart';
-import 'package:unicar/views/sales_view.dart';
+import 'package:unicar/features/cars/widgets/cars_view.dart';
+import 'package:unicar/features/customers/widgets/customers_view.dart';
+import 'package:unicar/features/sales/widgets/sales_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unicar/cubits/cars_cubit.dart';
-import 'package:unicar/models/car.dart';
 import 'package:intl/intl.dart';
+import 'package:unicar/features/cars/cubits/cars_cubit.dart';
+import 'package:unicar/features/cars/models/car.dart';
 
 class CarCard extends StatelessWidget {
   final Car car;

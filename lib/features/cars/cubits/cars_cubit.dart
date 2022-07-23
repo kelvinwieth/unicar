@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unicar/cubits/cars_state.dart';
-import 'package:unicar/models/car.dart';
-import 'package:unicar/repositories/car_repository.dart';
+import 'package:unicar/features/cars/cubits/cars_state.dart';
+import 'package:unicar/features/cars/models/car.dart';
+import 'package:unicar/features/cars/repositories/car_repository.dart';
 
 class CarsCubit extends Cubit<CarsState> {
   final CarRepository _repository;

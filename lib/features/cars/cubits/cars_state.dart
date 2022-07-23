@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:unicar/models/car.dart';
+import 'package:unicar/features/cars/models/car.dart';
 
 abstract class CarsState extends Equatable {
   @override

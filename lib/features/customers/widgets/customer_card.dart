@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
-import 'package:unicar/cubits/customers/customers_cubit.dart';
-import 'package:unicar/models/customer.dart';
+import 'package:unicar/features/customers/cubit/customers_cubit.dart';
+import 'package:unicar/features/customers/models/customer.dart';
 
 class CustomerCard extends StatelessWidget {
   final Customer customer;

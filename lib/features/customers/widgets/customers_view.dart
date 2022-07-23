@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unicar/cubits/cars_cubit.dart';
-import 'package:unicar/cubits/cars_state.dart';
+import 'package:unicar/features/customers/cubit/customers_cubit.dart';
+import 'package:unicar/features/customers/cubit/customers_state.dart';
+import 'package:unicar/features/customers/widgets/customer_card.dart';
+import 'package:unicar/features/customers/widgets/customer_form.dart';
 import 'package:unicar/utils/uni_theme.dart';
-import 'package:unicar/widgets/car_card.dart';
-import 'package:unicar/widgets/car_form.dart';
 
-class CarsView extends StatelessWidget {
-  const CarsView({
+class CustomersView extends StatelessWidget {
+  const CustomersView({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CarsCubit, CarsState>(
+    return BlocBuilder<CustomersCubit, CustomersState>(
       builder: (context, state) {
-        if (state is CarsLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+        if (state is CustomersLoadedState) {
+          final customers = state.customers;
 
-        if (state is CarsLoadedState) {
-          final cars = state.cars;
           return Scaffold(
             body: ListView.builder(
-              padding: const EdgeInsets.only(bottom: 80),
-              itemCount: cars.length,
+              itemCount: customers.length,
               itemBuilder: (context, index) {
-                final car = cars[index];
-                return CarCard(car: car);
+                final customer = customers[index];
+                return CustomerCard(customer: customer);
               },
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                final cubit = BlocProvider.of<CarsCubit>(context);
+                final cubit = BlocProvider.of<CustomersCubit>(context);
                 cubit.startCreation();
               },
               child: Container(
@@ -47,12 +41,12 @@ class CarsView extends StatelessWidget {
           );
         }
 
-        if (state is CreatingCarState) {
-          return const CarForm();
+        if (state is CreatingCustomerState) {
+          return const CustomerForm();
         }
 
-        if (state is EditingCarState) {
-          return CarForm(car: state.car);
+        if (state is EditingCustomerState) {
+          return CustomerForm(customer: state.customer);
         }
 
         return const Center(

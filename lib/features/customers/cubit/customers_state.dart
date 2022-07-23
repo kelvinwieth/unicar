@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:unicar/models/customer.dart';
+import 'package:unicar/features/customers/models/customer.dart';
 
 abstract class CustomersState extends Equatable {
   @override
