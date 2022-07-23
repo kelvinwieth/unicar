@@ -19,12 +19,10 @@ class CarsLoadedState extends CarsState {
   List<Object?> get props => [cars];
 }
 
-class CarsLoadingErrorState extends CarsState {}
-
 class CreatingCarState extends CarsState {}
 
-class CarsGenericErrorState extends CarsState {
+class CarsErrorState extends CarsState {
   final String message;
 
-  CarsGenericErrorState(this.message);
+  CarsErrorState(this.message);
 }

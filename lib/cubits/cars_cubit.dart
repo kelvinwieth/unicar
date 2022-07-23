@@ -18,7 +18,7 @@ class CarsCubit extends Cubit<CarsState> {
       emit(CarsLoadedState(cars));
       _lastCars = cars;
     } catch (e) {
-      emit(CarsLoadingErrorState());
+      emit(CarsErrorState("Falha ao carregar carros. Tente novamente."));
     }
   }
 
@@ -34,7 +34,7 @@ class CarsCubit extends Cubit<CarsState> {
         return;
       }
     } finally {
-      emit(CarsGenericErrorState("Erro ao adicionar carro. Tente novamente."));
+      emit(CarsErrorState("Erro ao adicionar carro. Tente novamente."));
     }
   }
 
