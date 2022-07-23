@@ -15,7 +15,7 @@ class UniTheme {
   static const BoxDecoration circularGradientDecoration = BoxDecoration(
     gradient: LinearGradient(
       colors: [
-        Colors.blueAccent,
+        Colors.blueGrey,
         Colors.black,
       ],
       begin: Alignment.bottomCenter,
