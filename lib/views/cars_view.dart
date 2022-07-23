@@ -32,13 +32,35 @@ class CarsView extends StatelessWidget {
               },
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                final cubit = BlocProvider.of<CarsCubit>(context);
+                cubit.startCreation();
+              },
               child: Container(
                 height: 60,
                 width: 60,
                 decoration: UniTheme.circularGradientDecoration,
                 child: const Icon(Icons.add),
               ),
+            ),
+          );
+        }
+
+        if (state is CreatingCarState) {
+          return Scaffold(
+            body: const Center(
+              child: Text('Creating car...'),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                final cubit = BlocProvider.of<CarsCubit>(context);
+                cubit.finishCreation();
+              },
+              child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: UniTheme.circularGradientDecoration,
+                  child: const Icon(Icons.exit_to_app)),
             ),
           );
         }

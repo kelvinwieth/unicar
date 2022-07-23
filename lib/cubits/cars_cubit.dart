@@ -18,4 +18,12 @@ class CarsCubit extends Cubit<CarsState> {
       emit(CarsLoadingErrorState());
     }
   }
+
+  void startCreation() {
+    emit(CreatingCarState());
+  }
+
+  void finishCreation() {
+    _loadCars();
+  }
 }

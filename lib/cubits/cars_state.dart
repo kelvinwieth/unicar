@@ -20,3 +20,5 @@ class CarsLoadedState extends CarsState {
 }
 
 class CarsLoadingErrorState extends CarsState {}
+
+class CreatingCarState extends CarsState {}
