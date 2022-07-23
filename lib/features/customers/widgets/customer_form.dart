@@ -34,10 +34,10 @@ class _CustomerFormState extends State<CustomerForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  'Adicionar cliente',
+                Text(
+                  '${isEditing ? 'Atualizar' : 'Adicionar'} cliente',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 22),
+                  style: const TextStyle(fontSize: 22),
                 ),
                 const SizedBox(height: 40),
                 TextFormField(
