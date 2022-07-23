@@ -27,15 +27,15 @@ class CustomersCubit extends Cubit<CustomersState> {
   }
 
   void addCustomer(Customer customer) async {
-    // try {
-    // var success = await _repository.add(customer);
-    // if (success) {
-    //   _loadCustomers();
-    //   return;
-    // }
-    // } finally {
-    //   emit(CustomersErrorState("Erro ao adicionar cliente. Tente novamente."));
-    // }
+    try {
+      var success = await _repository.add(customer);
+      if (success) {
+        _loadCustomers();
+        return;
+      }
+    } finally {
+      emit(CustomersErrorState("Erro ao adicionar cliente. Tente novamente."));
+    }
   }
 
   void cancelCreation() {
