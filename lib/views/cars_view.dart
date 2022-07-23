@@ -48,19 +48,50 @@ class CarsView extends StatelessWidget {
 
         if (state is CreatingCarState) {
           return Scaffold(
-            body: const Center(
-              child: Text('Creating car...'),
+            body: Form(
+              child: Column(
+                children: [
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Campo obrigatório.';
+                      }
+
+                      return null;
+                    },
+                  ),
+                ],
+              ),
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                final cubit = BlocProvider.of<CarsCubit>(context);
-                cubit.finishCreation();
-              },
-              child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: UniTheme.circularGradientDecoration,
-                  child: const Icon(Icons.exit_to_app)),
+            floatingActionButton: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    final cubit = BlocProvider.of<CarsCubit>(context);
+                    cubit.finishCreation();
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: UniTheme.roundCancelButtonDecoration,
+                    child: const Icon(Icons.close),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                FloatingActionButton(
+                  onPressed: () {
+                    final cubit = BlocProvider.of<CarsCubit>(context);
+                    cubit.finishCreation();
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: UniTheme.roundConfirmButtonDecoration,
+                    child: const Icon(Icons.done),
+                  ),
+                ),
+              ],
             ),
           );
         }
