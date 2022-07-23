@@ -2,6 +2,8 @@ import 'package:unicar/models/car.dart';
 
 abstract class CarRepository {
   Future<List<Car>> getAll();
+
+  Future<bool> add(Car car);
 }
 
 class CarInMemoryRepository implements CarRepository {
@@ -27,5 +29,12 @@ class CarInMemoryRepository implements CarRepository {
   Future<List<Car>> getAll() async {
     await Future.delayed(const Duration(milliseconds: 700));
     return _cars;
+  }
+
+  @override
+  Future<bool> add(Car car) async {
+    await Future.delayed(const Duration(seconds: 1));
+    _cars.add(car);
+    return true;
   }
 }
