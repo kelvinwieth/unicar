@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicar/commom/widgets/bottom_vertical_divider.dart';
 import 'package:unicar/commom/widgets/price_form_field.dart';
 import 'package:unicar/features/sales/cubit/sales_cubit.dart';
 import 'package:unicar/features/sales/models/sale.dart';
@@ -99,6 +100,7 @@ class _SaleFormState extends State<SaleForm> {
                 },
               ),
             ),
+            const BottomVerticalDivider(),
             Expanded(
               child: IconButton(
                 color: Colors.green,

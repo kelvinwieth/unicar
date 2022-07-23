@@ -2,6 +2,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:unicar/commom/widgets/bottom_vertical_divider.dart';
 import 'package:unicar/commom/widgets/price_form_field.dart';
 import 'package:unicar/features/cars/cubits/cars_cubit.dart';
 import 'package:unicar/features/cars/models/car.dart';
@@ -93,6 +94,7 @@ class _CarFormState extends State<CarForm> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
@@ -105,6 +107,7 @@ class _CarFormState extends State<CarForm> {
                 },
               ),
             ),
+            const BottomVerticalDivider(),
             Expanded(
               child: IconButton(
                 color: Colors.green,

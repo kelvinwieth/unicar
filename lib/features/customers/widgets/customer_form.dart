@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicar/commom/widgets/bottom_vertical_divider.dart';
 import 'package:unicar/features/customers/cubit/customers_cubit.dart';
 import 'package:unicar/features/customers/models/customer.dart';
 
@@ -72,6 +73,7 @@ class _CustomerFormState extends State<CustomerForm> {
                 },
               ),
             ),
+            const BottomVerticalDivider(),
             Expanded(
               child: IconButton(
                 color: Colors.green,
