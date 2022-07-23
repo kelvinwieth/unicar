@@ -37,9 +37,9 @@ class CarCard extends StatelessWidget {
             ),
             child: ListTile(
               leading: Container(
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.all(1.5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(1.5),
                   color: Colors.white,
                 ),
                 child: Image.network(
