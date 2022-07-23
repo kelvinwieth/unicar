@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicar/cubits/customers/customers_cubit.dart';
 import 'package:unicar/cubits/customers/customers_state.dart';
+import 'package:unicar/utils/uni_theme.dart';
 import 'package:unicar/widgets/customer_card.dart';
+import 'package:unicar/widgets/customer_form.dart';
 
 class CustomersView extends StatelessWidget {
   const CustomersView({
@@ -24,7 +26,23 @@ class CustomersView extends StatelessWidget {
                 return CustomerCard(customer: customer);
               },
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                final cubit = BlocProvider.of<CustomersCubit>(context);
+                cubit.startCreation();
+              },
+              child: Container(
+                height: 60,
+                width: 60,
+                decoration: UniTheme.circularGradientDecoration,
+                child: const Icon(Icons.add),
+              ),
+            ),
           );
+        }
+
+        if (state is CreatingCustomerState) {
+          return const CustomerForm();
         }
 
         return const Center(

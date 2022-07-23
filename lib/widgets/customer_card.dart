@@ -38,6 +38,10 @@ class CustomerCard extends StatelessWidget {
               text: customer.name,
               backgroundColor: Colors.blueGrey,
             ),
+            trailing: const Icon(
+              Icons.more_vert,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
