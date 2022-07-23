@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
+import 'package:unicar/cubits/customers/customers_cubit.dart';
 import 'package:unicar/models/customer.dart';
 
 class CustomerCard extends StatelessWidget {
@@ -38,9 +40,15 @@ class CustomerCard extends StatelessWidget {
               text: customer.name,
               backgroundColor: Colors.blueGrey,
             ),
-            trailing: const Icon(
-              Icons.more_vert,
-              color: Colors.white,
+            trailing: IconButton(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                final cubit = BlocProvider.of<CustomersCubit>(context);
+                cubit.startEdition(customer);
+              },
             ),
           ),
         ),

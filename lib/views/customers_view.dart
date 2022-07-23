@@ -45,6 +45,10 @@ class CustomersView extends StatelessWidget {
           return const CustomerForm();
         }
 
+        if (state is EditingCustomerState) {
+          return CustomerForm(customer: state.customer);
+        }
+
         return const Center(
           child: CircularProgressIndicator(),
         );

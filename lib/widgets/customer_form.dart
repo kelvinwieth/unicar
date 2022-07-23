@@ -4,7 +4,12 @@ import 'package:unicar/cubits/customers/customers_cubit.dart';
 import 'package:unicar/models/customer.dart';
 
 class CustomerForm extends StatefulWidget {
-  const CustomerForm({Key? key}) : super(key: key);
+  final Customer? customer;
+
+  const CustomerForm({
+    Key? key,
+    this.customer,
+  }) : super(key: key);
 
   @override
   State<CustomerForm> createState() => _CustomerFormState();
@@ -15,7 +20,8 @@ class _CustomerFormState extends State<CustomerForm> {
 
   @override
   Widget build(BuildContext context) {
-    var customer = Customer(name: '');
+    final isEditing = widget.customer != null;
+    var customer = isEditing ? widget.customer! : Customer(name: '');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -35,6 +41,7 @@ class _CustomerFormState extends State<CustomerForm> {
                 ),
                 const SizedBox(height: 40),
                 TextFormField(
+                  initialValue: customer.name,
                   validator: validate,
                   maxLength: 30,
                   decoration: const InputDecoration(
@@ -79,7 +86,12 @@ class _CustomerFormState extends State<CustomerForm> {
                   _formKey.currentState!.save();
 
                   final cubit = BlocProvider.of<CustomersCubit>(context);
-                  cubit.addCustomer(customer);
+
+                  if (isEditing) {
+                    cubit.updateCustomer(customer);
+                  } else {
+                    cubit.addCustomer(customer);
+                  }
                 },
               ),
             ),

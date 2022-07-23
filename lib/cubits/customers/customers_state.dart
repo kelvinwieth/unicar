@@ -21,6 +21,12 @@ class CustomersLoadedState extends CustomersState {
 
 class CreatingCustomerState extends CustomersState {}
 
+class EditingCustomerState extends CustomersState {
+  final Customer customer;
+
+  EditingCustomerState(this.customer);
+}
+
 class CustomersErrorState extends CustomersState {
   final String message;
 

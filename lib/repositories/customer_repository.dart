@@ -4,6 +4,8 @@ abstract class CustomerRepository {
   Future<List<Customer>> getAll();
 
   Future<bool> add(Customer customer);
+
+  Future<bool> update(Customer customer);
 }
 
 class CustomerInMemoryRepository implements CustomerRepository {
@@ -23,5 +25,16 @@ class CustomerInMemoryRepository implements CustomerRepository {
     await Future.delayed(const Duration(seconds: 1));
     _customers.add(customer);
     return true;
+  }
+
+  @override
+  Future<bool> update(Customer customer) async {
+    try {
+      var sourceCustomer = _customers.firstWhere((c) => c.id == customer.id);
+      sourceCustomer.name = customer.name;
+      return true;
+    } on StateError {
+      return false;
+    }
   }
 }
