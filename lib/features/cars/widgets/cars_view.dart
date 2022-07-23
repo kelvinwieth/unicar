@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicar/commom/widgets/floating_add_button.dart';
 import 'package:unicar/features/cars/cubits/cars_cubit.dart';
 import 'package:unicar/features/cars/cubits/cars_state.dart';
 import 'package:unicar/features/cars/widgets/car_card.dart';
 import 'package:unicar/features/cars/widgets/car_form.dart';
-import 'package:unicar/commom/themes/uni_theme.dart';
 
 class CarsView extends StatelessWidget {
   const CarsView({
@@ -32,17 +32,11 @@ class CarsView extends StatelessWidget {
                 return CarCard(car: car);
               },
             ),
-            floatingActionButton: FloatingActionButton(
+            floatingActionButton: FloatingAddButton(
               onPressed: () {
                 final cubit = BlocProvider.of<CarsCubit>(context);
                 cubit.startCreation();
               },
-              child: Container(
-                height: 60,
-                width: 60,
-                decoration: UniTheme.circularGradientDecoration,
-                child: const Icon(Icons.add),
-              ),
             ),
           );
         }
