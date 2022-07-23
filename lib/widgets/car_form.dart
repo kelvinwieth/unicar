@@ -17,58 +17,66 @@ class _CarFormState extends State<CarForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Form(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 14),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextFormField(
-                validator: validate,
-                maxLength: 30,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.abc),
-                  labelText: 'Título do anúncio',
-                  hintText: 'Corsa 1.0 2002 Manual',
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 14),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  'Adicionar carro',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 22),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                validator: validate,
-                maxLength: 16,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: [
-                  CurrencyTextInputFormatter(
-                    locale: 'pt-BR',
-                    decimalDigits: 2,
-                    symbol: 'R\$',
-                  )
-                ],
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.attach_money),
-                  labelText: 'Preço',
-                  hintText: 'R\$ 50.000,00',
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 40),
+                TextFormField(
+                  validator: validate,
+                  maxLength: 30,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.abc),
+                    labelText: 'Título do anúncio',
+                    hintText: 'Uno Mille 1.0 2002 Manual',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                validator: validate,
-                maxLength: 50,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.camera_alt),
-                  labelText: 'Link da foto',
-                  hintText: 'https://imgur.com/2TYFeIa.png',
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 20),
+                TextFormField(
+                  validator: validate,
+                  maxLength: 16,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  inputFormatters: [
+                    CurrencyTextInputFormatter(
+                      locale: 'pt-BR',
+                      decimalDigits: 2,
+                      symbol: 'R\$',
+                    )
+                  ],
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.attach_money),
+                    labelText: 'Preço',
+                    hintText: 'R\$ 15.000,00',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                TextFormField(
+                  validator: validate,
+                  maxLength: 50,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.camera_alt),
+                    labelText: 'Link da foto',
+                    hintText: 'https://imgur.com/2TYFeIa.png',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
