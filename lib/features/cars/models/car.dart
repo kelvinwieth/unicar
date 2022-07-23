@@ -11,10 +11,4 @@ class Car {
     required this.price,
     required this.photo,
   }) : id = const Uuid().v1();
-
-  void update(Car newProps) {
-    title = newProps.title;
-    price = newProps.price;
-    photo = newProps.photo;
-  }
 }
