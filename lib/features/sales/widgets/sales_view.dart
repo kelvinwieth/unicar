@@ -4,6 +4,7 @@ import 'package:unicar/commom/widgets/floating_add_button.dart';
 import 'package:unicar/features/sales/cubit/sales_cubit.dart';
 import 'package:unicar/features/sales/cubit/sales_state.dart';
 import 'package:unicar/features/sales/widgets/sale_card.dart';
+import 'package:unicar/features/sales/widgets/sale_form.dart';
 
 class SalesView extends StatelessWidget {
   const SalesView({
@@ -30,6 +31,10 @@ class SalesView extends StatelessWidget {
               },
             ),
           );
+        }
+
+        if (state is CreatingSaleState) {
+          return const SaleForm();
         }
 
         return const Center(

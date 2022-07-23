@@ -1,36 +1,29 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:unicar/commom/widgets/price_form_field.dart';
-import 'package:unicar/features/cars/cubits/cars_cubit.dart';
-import 'package:unicar/features/cars/models/car.dart';
+import 'package:unicar/features/sales/cubit/sales_cubit.dart';
+import 'package:unicar/features/sales/models/sale.dart';
 
-class CarForm extends StatefulWidget {
-  final Car? car;
+class SaleForm extends StatefulWidget {
+  const SaleForm({Key? key, this.sale}) : super(key: key);
 
-  const CarForm({
-    Key? key,
-    this.car,
-  }) : super(key: key);
+  final Sale? sale;
 
   @override
-  State<CarForm> createState() => _CarFormState();
+  State<SaleForm> createState() => _SaleFormState();
 }
 
-class _CarFormState extends State<CarForm> {
-  final currencyFormatter = NumberFormat.simpleCurrency();
+class _SaleFormState extends State<SaleForm> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final isEditing = widget.car != null;
-    var car = isEditing
-        ? widget.car!
-        : Car(
-            title: '',
+    final isEditing = widget.sale != null;
+    var sale = isEditing
+        ? widget.sale!
+        : Sale(
+            car: '',
+            customer: '',
             price: 0,
-            photo: '',
           );
 
     return Scaffold(
@@ -44,47 +37,38 @@ class _CarFormState extends State<CarForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  '${isEditing ? 'Atualizar' : 'Adicionar'} carro',
+                const Text(
+                  'Adicionar venda',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 22),
+                  style: TextStyle(fontSize: 22),
                 ),
                 const SizedBox(height: 40),
                 TextFormField(
-                  initialValue: car.title,
+                  initialValue: sale.customer,
                   validator: validate,
                   maxLength: 30,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.abc),
-                    labelText: 'Título do anúncio',
-                    hintText: 'Uno Mille 1.0 2002',
+                    labelText: 'Nome do cliente',
+                    hintText: 'João da Silva',
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     border: OutlineInputBorder(),
                   ),
-                  onSaved: (value) => car.title = value!,
+                  onSaved: (value) => sale.customer = value!,
                 ),
-                const SizedBox(height: 20),
-                PriceFormField(
-                  initialValue: isEditing ? currencyFormatter.format(car.price) : null,
-                  validator: validate,
-                  onSaved: (value) {
-                    final price = value!.replaceAll('R\$', '').replaceAll('.', '').replaceAll(',', '.').trim();
-                    car.price = double.tryParse(price) ?? 0;
-                  },
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
                 TextFormField(
-                  initialValue: car.photo,
+                  initialValue: sale.customer,
                   validator: validate,
-                  maxLength: 50,
+                  maxLength: 30,
                   decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.camera_alt),
-                    labelText: 'Link da foto',
-                    hintText: 'https://imgur.com/2TYFeIa.png',
+                    prefixIcon: Icon(Icons.abc),
+                    labelText: 'Carro',
+                    hintText: 'BMW M5 2020',
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     border: OutlineInputBorder(),
                   ),
-                  onSaved: (value) => car.photo = value!,
+                  onSaved: (value) => sale.car = value!,
                 ),
               ],
             ),
@@ -100,7 +84,7 @@ class _CarFormState extends State<CarForm> {
                 color: Colors.grey,
                 icon: const Icon(Icons.close, size: 30),
                 onPressed: () {
-                  final cubit = BlocProvider.of<CarsCubit>(context);
+                  final cubit = BlocProvider.of<SalesCubit>(context);
                   cubit.cancelCreation();
                 },
               ),
@@ -118,12 +102,12 @@ class _CarFormState extends State<CarForm> {
 
                   _formKey.currentState!.save();
 
-                  final cubit = BlocProvider.of<CarsCubit>(context);
+                  final cubit = BlocProvider.of<SalesCubit>(context);
 
                   if (isEditing) {
-                    cubit.updateCar(car);
+                    cubit.updateSale(sale);
                   } else {
-                    cubit.addCar(car);
+                    cubit.addSale(sale);
                   }
                 },
               ),
